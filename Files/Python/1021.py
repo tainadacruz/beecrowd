@@ -1,76 +1,59 @@
 # -*- coding: utf-8 -*-
-  
-n = float(input())
-n = round(n,2)
 
-nCem = n // 100
-n -= (nCem*100)
-n = round(n,2)
+def update(number, aux, bill):
+    number -= (aux * bill)
+    number = round(number,2)
+    return number
 
-nCinq = (n % 100) // 50
-n -= (nCinq*50)
-n = round(n,2)
+def counting(number, bill, last):
+    if number == 0:
+        return 0
 
-nVinte = (n % 50) // 20
-n -= (nVinte*20)
-n = round(n,2)
+    if bill >= 100:
+        x = number // bill
+    else:
+        x = (number % last) // bill
+    return x
 
-nDez = (n % 20) // 10
-n -= (nDez*10)
-n = round(n,2)
-
-nCinco = (n % 10) // 5
-n -= (nCinco*5)
-n = round(n,2)
-
-nDois = (n % 5) // 2
-n -= (nDois*2)
-n = round(n,2)
-
-if (n != 0):
-    n1 = (n % 2) // 1
-    n -= (n1*1)
-    n = round(n,2)
     
-    n05 = (n % 1) // 0.5
-    n -= (n05*0.5)
-    n = round(n,2)
-    
-    n025 = (n % 0.5) // 0.25
-    n -= (n025*0.25)
-    n = round(n,2)
-    
-    n010 = (n % 0.25) // 0.10
-    n -= (n010*0.10)
-    n = round(n,2)
-    
-    n005 = (n % 0.10) // 0.05
-    n -= (n005*0.05)
-    n = round(n,2)
-    
-    n001 = (n % 0.05) / 0.01
-    n -= (n001*0.01)
-    n = round(n,2)
-    
-else:
-    n1 = 0
-    n05 = 0
-    n025 = 0
-    n010 = 0
-    n005 = 0
-    n001 = 0
+num = float(input())
+num = round(num,2)
 
 print("NOTAS:")
-print("%d nota(s) de R$ 100.00" % nCem)
-print("%d nota(s) de R$ 50.00" % nCinq)
-print("%d nota(s) de R$ 20.00" % nVinte)
-print("%d nota(s) de R$ 10.00" % nDez)
-print("%d nota(s) de R$ 5.00" % nCinco)
-print("%d nota(s) de R$ 2.00" % nDois)
+aux = counting(num, 100, None)
+print("%d nota(s) de R$ 100.00" % aux)
+num = update(num, aux, 100)
+aux = counting(num, 50, 100)
+print("%d nota(s) de R$ 50.00" % aux)
+num = update(num, aux, 50)
+aux = counting(num, 20, 50)
+print("%d nota(s) de R$ 20.00" % aux)
+num = update(num, aux, 20)
+aux = counting(num, 10, 20)
+print("%d nota(s) de R$ 10.00" % aux)
+num = update(num, aux, 10)
+aux = counting(num, 5, 10)
+print("%d nota(s) de R$ 5.00" % aux)
+num = update(num, aux, 5)
+aux = counting(num, 2, 5)
+print("%d nota(s) de R$ 2.00" % aux)
+num = update(num, aux, 2)
+
 print("MOEDAS:")
-print("%d moeda(s) de R$ 1.00" % n1)
-print("%d moeda(s) de R$ 0.50" % n05)
-print("%d moeda(s) de R$ 0.25" % n025)
-print("%d moeda(s) de R$ 0.10" % n010)
-print("%d moeda(s) de R$ 0.05" % n005)
-print("%d moeda(s) de R$ 0.01" % n001)
+aux = counting(num, 1, 2)
+print("%d moeda(s) de R$ 1.00" % aux)
+num = update(num, aux, 1)
+aux = counting(num, 0.5, 1)
+print("%d moeda(s) de R$ 0.50" % aux)
+num = update(num, aux, 0.5)
+aux = counting(num, 0.25, 0.5)
+print("%d moeda(s) de R$ 0.25" % aux)
+num = update(num, aux, 0.25)
+aux = counting(num, 0.10, 0.25)
+print("%d moeda(s) de R$ 0.10" % aux)
+num = update(num, aux, 0.10)
+aux = counting(num, 0.05, 0.10)
+print("%d moeda(s) de R$ 0.05" % aux)
+num = update(num, aux, 0.05)
+aux = counting(num, 0.01, 0.05)
+print("%d moeda(s) de R$ 0.01" % aux)
